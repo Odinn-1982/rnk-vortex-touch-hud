@@ -1,0 +1,32 @@
+{
+  "id": "rnk-vortex-touch-hud",
+  "title": "RNK Vortex Touch HUD",
+  "description": "Mobile and tablet touch-optimized HUD controls for Foundry VTT, integrated with RNK Vortex Quantum™ security system",
+  "authors": [
+    {
+      "name": "Asgard Innovations / RNK™",
+      "url": "https://vortex.quantum"
+    }
+  ],
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "11",
+    "verified": "11.315"
+  },
+  "esmodules": [
+    "scripts/rnk-vortex-touch-hud.js"
+  ],
+  "styles": [
+    "styles/touch-hud.css"
+  ],
+  "manifest": "module.json",
+  "download": "",
+  "license": "MIT",
+  "readme": "README.md",
+  "bugs": "",
+  "changelog": "",
+  "flags": {},
+  "relationships": {
+    "requires": []
+  }
+}

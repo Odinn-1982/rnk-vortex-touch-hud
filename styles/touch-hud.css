@@ -1,0 +1,482 @@
+/* Vortex Touch HUD Styles */
+
+:root {
+  --button-size: 60px;
+  --screen-width: 100vw;
+  --screen-height: 100vh;
+  --primary-color: #00ff88;
+  --secondary-color: #0088ff;
+  --danger-color: #ff0044;
+  --bg-color: rgba(0, 10, 20, 0.95);
+  --border-color: #00ff88;
+  --shadow: 0 0 20px rgba(0, 255, 136, 0.3);
+}
+
+#rnk-vortex-touch-hud-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 9999;
+  font-family: 'Courier New', monospace;
+}
+
+.rnk-vortex-touch-hud {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  pointer-events: auto;
+}
+
+/* Main HUD Panel */
+.rnk-vortex-touch-hud-panel {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 20px;
+  align-items: flex-end;
+  padding: 15px;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+}
+
+/* D-Pad Container */
+.vortex-dpad-container {
+  flex-shrink: 0;
+}
+
+.vortex-dpad {
+  position: relative;
+  width: calc(var(--button-size) * 3);
+  height: calc(var(--button-size) * 3);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.vortex-dpad button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--button-size);
+  height: var(--button-size);
+  background: linear-gradient(135deg, #001144, #003366);
+  border: 2px solid var(--border-color);
+  color: var(--primary-color);
+  font-size: 1.5em;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  touch-action: manipulation;
+}
+
+.vortex-dpad button:active,
+.vortex-dpad button.active {
+  transform: scale(0.95);
+  box-shadow: inset 0 0 15px rgba(0, 255, 136, 0.5), var(--shadow);
+  background: linear-gradient(135deg, #003366, #006688);
+}
+
+.vortex-dpad button:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.6), var(--shadow);
+}
+
+/* D-Pad Center */
+.vortex-dpad-center {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.vortex-dpad-up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.vortex-dpad-down {
+  grid-column: 2;
+  grid-row: 3;
+}
+
+.vortex-dpad-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.vortex-dpad-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+/* Center Primary Action */
+.vortex-center-action {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.vortex-primary-button {
+  width: calc(var(--button-size) * 1.3);
+  height: calc(var(--button-size) * 1.3);
+  background: linear-gradient(135deg, #662200, #dd4400);
+  border: 3px solid var(--danger-color);
+  color: white;
+  font-size: 1.8em;
+  font-weight: bold;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  box-shadow: 0 0 25px rgba(255, 0, 68, 0.4);
+  touch-action: manipulation;
+}
+
+.vortex-primary-button:active,
+.vortex-primary-button.active {
+  transform: scale(0.93);
+  box-shadow: inset 0 0 20px rgba(255, 0, 68, 0.6), 0 0 25px rgba(255, 0, 68, 0.6);
+}
+
+.vortex-primary-button:hover {
+  box-shadow: 0 0 30px rgba(255, 0, 68, 0.7);
+}
+
+.action-icon {
+  display: block;
+  font-size: 1.2em;
+}
+
+.action-label {
+  display: none;
+  font-size: 0.6em;
+}
+
+/* Right Action Buttons */
+.vortex-actions-container {
+  flex-shrink: 0;
+}
+
+.vortex-action-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.vortex-action-btn {
+  width: calc(var(--button-size) * 0.9);
+  height: calc(var(--button-size) * 0.9);
+  background: linear-gradient(135deg, #001a4d, #003d9e);
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+  font-size: 1.3em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vortex-action-btn:active,
+.vortex-action-btn.active {
+  transform: scale(0.92);
+  box-shadow: inset 0 0 12px rgba(0, 136, 255, 0.5), 0 0 15px rgba(0, 136, 255, 0.4);
+  background: linear-gradient(135deg, #003d9e, #0055cc);
+}
+
+.vortex-action-btn:hover {
+  box-shadow: 0 0 15px rgba(0, 136, 255, 0.5);
+}
+
+/* Top Controls */
+.vortex-top-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  gap: 10px;
+  z-index: 9998;
+}
+
+.vortex-control-btn {
+  width: var(--button-size);
+  height: var(--button-size);
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  border: 2px solid var(--border-color);
+  color: var(--primary-color);
+  font-size: 1.3em;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  padding: 0;
+  touch-action: manipulation;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vortex-control-btn:active,
+.vortex-control-btn.active {
+  transform: scale(0.95);
+  box-shadow: inset 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+.vortex-control-btn:hover {
+  box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+}
+
+/* Status Bar */
+.vortex-status-bar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 15px;
+  padding: 10px 15px;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9em;
+  color: var(--primary-color);
+  box-shadow: var(--shadow);
+  z-index: 9998;
+}
+
+.vortex-status-hp {
+  color: #ff4444;
+  font-weight: bold;
+}
+
+.vortex-status-resources {
+  color: #44aaff;
+}
+
+.vortex-security-indicator {
+  color: var(--primary-color);
+  font-weight: bold;
+  cursor: help;
+}
+
+/* Panel Tabs */
+.vortex-panel-tabs {
+  position: absolute;
+  bottom: 100%;
+  left: 20px;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  padding: 8px;
+  background: var(--bg-color);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+.vortex-panel-tab {
+  padding: 8px 12px;
+  background: rgba(0, 136, 255, 0.2);
+  border: 1px solid var(--secondary-color);
+  color: var(--secondary-color);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85em;
+  font-weight: bold;
+  transition: all 0.2s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.vortex-panel-tab.active {
+  background: var(--secondary-color);
+  color: white;
+  box-shadow: 0 0 10px rgba(0, 136, 255, 0.6);
+}
+
+.vortex-panel-tab:active,
+.vortex-panel-tab:hover {
+  transform: translateY(-2px);
+}
+
+/* Responsive Layouts */
+
+/* Compact Layout */
+.rnk-vortex-touch-hud.compact .rnk-vortex-touch-hud-panel {
+  grid-template-columns: auto auto;
+  gap: 10px;
+}
+
+.rnk-vortex-touch-hud.compact .vortex-center-action {
+  display: none;
+}
+
+/* Expanded Layout */
+.rnk-vortex-touch-hud.expanded .rnk-vortex-touch-hud-panel {
+  grid-template-columns: auto 1fr auto;
+  gap: 30px;
+}
+
+.rnk-vortex-touch-hud.expanded .vortex-action-buttons {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+/* Landscape Orientation */
+.rnk-vortex-touch-hud.landscape .rnk-vortex-touch-hud-panel {
+  grid-template-columns: auto 1fr auto;
+  bottom: 20px;
+}
+
+/* Portrait Orientation */
+@media (orientation: portrait) {
+  .rnk-vortex-touch-hud-panel {
+    grid-template-columns: auto 1fr;
+    bottom: 20px;
+  }
+
+  .vortex-center-action {
+    display: none;
+  }
+}
+
+/* Small Screen (Phone) */
+@media (max-width: 480px) {
+  :root {
+    --button-size: 50px;
+  }
+
+  .rnk-vortex-touch-hud-panel {
+    grid-template-columns: auto auto;
+    gap: 10px;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    padding: 10px;
+  }
+
+  .vortex-action-buttons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vortex-top-controls {
+    top: 10px;
+    right: 10px;
+    gap: 5px;
+  }
+
+  .vortex-status-bar {
+    top: 10px;
+    left: 10px;
+    font-size: 0.8em;
+    gap: 10px;
+  }
+
+  .action-label {
+    display: none;
+  }
+}
+
+/* Medium Screen (Tablet) */
+@media (min-width: 768px) and (max-width: 1024px) {
+  :root {
+    --button-size: 65px;
+  }
+
+  .action-label {
+    display: block;
+  }
+}
+
+/* Large Screen (Tablet/TV) */
+@media (min-width: 1025px) {
+  :root {
+    --button-size: 75px;
+  }
+
+  .rnk-vortex-touch-hud-panel {
+    grid-template-columns: auto 1fr auto;
+    gap: 30px;
+  }
+
+  .vortex-action-buttons {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .action-label {
+    display: block;
+  }
+}
+
+/* Touch Device Optimizations */
+@media (pointer: coarse) {
+  button {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .vortex-dpad button,
+  .vortex-action-btn,
+  .vortex-control-btn,
+  .vortex-primary-button {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* Accessibility: High Contrast Mode */
+@media (prefers-contrast: more) {
+  :root {
+    --primary-color: #00ff00;
+    --secondary-color: #00ffff;
+    --danger-color: #ff0000;
+  }
+
+  .rnk-vortex-touch-hud-panel {
+    border-width: 3px;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  button {
+    transition: none;
+  }
+
+  .vortex-dpad button:active,
+  .vortex-action-btn:active,
+  .vortex-primary-button:active {
+    transform: none;
+  }
+}
+
+/* Print Styles */
+@media print {
+  #rnk-vortex-touch-hud-container {
+    display: none;
+  }
+}
