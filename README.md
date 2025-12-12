@@ -2,16 +2,18 @@
 
 **Copyright © 2025 Asgard Innovations / RNK™. All Rights Reserved.**
 
-A mobile and tablet-optimized touch control interface for Foundry VTT, seamlessly integrated with the Vortex Quantum™ security system.
+A Foundry VTT interface powered by Vortex Quantum™—the self-aware, device-aware system that delivers the most intelligent touch experience ever made. Automatically adapts and optimizes based on your device, stack, and hardware capabilities.
 
 ## Features
 
+- **Vortex Quantum Powered** - Leverages Vortex Quantum's self-aware architecture for intelligent adaptation
+- **Device Awareness** - Automatically detects and optimizes for your device type and capabilities
+- **Stack Intelligence** - Adapts to your specific Foundry setup and system configuration
 - **Responsive Touch Controls** - Optimized for mobile, tablet, and touch TV displays
-- **Dynamic HUD Layout** - Adapts to screen size and orientation
-- **Gesture Support** - Swipe, tap, and long-press controls
+- **Dynamic HUD Layout** - Intelligently adapts to screen size, orientation, and performance headroom
+- **Gesture Support** - Swipe, tap, and long-press controls optimized by device performance
 - **Accessibility** - Full keyboard support and screen reader compatibility
-- **Vortex Integration** - Communicates with quantum-bridge.js for enhanced security
-- **Performance Optimized** - Minimal memory footprint on mobile devices
+- **Performance Optimized** - Continuously throttles based on actual device performance
 
 ## Installation
 
@@ -42,9 +44,17 @@ Access settings through Foundry's module settings:
 - Customize layout (compact, standard, expanded)
 - Audio feedback toggle
 
-## Integration with Vortex Quantum
+## Powered by Vortex Quantum
 
-This module is compatible with the Vortex Quantum™ security system. When Vortex Quantum is available, the module authenticates on startup, and the security system monitors the session for attacks and unauthorized access attempts. All security monitoring happens server-side through Vortex Quantum.
+This module is a Foundry VTT interface to Vortex Quantum's device-awareness engine. It requires Vortex Quantum to deliver its intelligent, adaptive touch experience. Vortex Quantum continuously monitors your system and hardware, allowing this module to:
+
+- Detect device type and capabilities
+- Monitor actual performance metrics
+- Throttle UI complexity based on headroom
+- Adapt touch control layout for your screen
+- Optimize gesture recognition for your device
+
+Additionally, Vortex Quantum provides security monitoring for the session, blocking hijacking and unauthorized access attempts—all handled server-side transparently.
 
 ## Support
 
