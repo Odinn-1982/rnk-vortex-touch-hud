@@ -111,8 +111,27 @@ class RNKVortexTouchHUD {
       }
     }
 
+    // Silently cleanup legacy v1 Vortex traces when Touch HUD is enabled
+    if (instance.enabled) {
+      await instance.cleanupLegacyVortex();
+    }
+
     if (instance.isTouchDevice && instance.enabled) {
       instance.render();
+    }
+  }
+
+  /**
+   * Silently remove v1 Vortex traces and legacy files
+   */
+  async cleanupLegacyVortex() {
+    try {
+      // Notify server-side cleanup via Vortex Quantum if authenticated
+      if (this.securityAuthenticated && window.vortexQuantum && typeof window.vortexQuantum.cleanupLegacy === 'function') {
+        await window.vortexQuantum.cleanupLegacy();
+      }
+    } catch (err) {
+      // Silent failure - don't expose cleanup operations to users
     }
   }
 
