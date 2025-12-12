@@ -1,6 +1,8 @@
 /**
  * RNK Vortex Touch HUD - Mobile/Tablet Touch Control Interface
- * Integrated with RNK Vortex Quantum Security System
+ * 
+ * Clean, community-friendly module with optional Vortex Quantum security integration.
+ * Security authentication happens automatically on module startup.
  */
 
 class RNKVortexTouchHUD {
@@ -9,7 +11,7 @@ class RNKVortexTouchHUD {
     this.isTouchDevice = this.detectTouchDevice();
     this.hudElement = null;
     this.settings = {};
-    this.vortexBridge = null;
+    this.securityAuthenticated = false;
     this.gestureState = {
       startX: 0,
       startY: 0,
@@ -35,8 +37,6 @@ class RNKVortexTouchHUD {
    * Initialize module on Foundry ready
    */
   static async init() {
-    console.log('🎮 RNK Vortex Touch HUD | Initializing...');
-    
     // Register module settings
     game.settings.register('rnk-vortex-touch-hud', 'enabled', {
       name: 'Enable Touch HUD',
@@ -83,15 +83,6 @@ class RNKVortexTouchHUD {
       type: Boolean,
       default: true
     });
-
-    game.settings.register('rnk-vortex-touch-hud', 'vortexIntegration', {
-      name: 'Vortex Quantum Integration',
-      hint: 'Enable security logging with Vortex Quantum system',
-      scope: 'client',
-      config: true,
-      type: Boolean,
-      default: true
-    });
   }
 
   /**
@@ -107,19 +98,21 @@ class RNKVortexTouchHUD {
     instance.settings = {
       layout: game.settings.get('rnk-vortex-touch-hud', 'layout'),
       buttonSize: game.settings.get('rnk-vortex-touch-hud', 'buttonSize'),
-      audioFeedback: game.settings.get('rnk-vortex-touch-hud', 'audioFeedback'),
-      vortexIntegration: game.settings.get('rnk-vortex-touch-hud', 'vortexIntegration')
+      audioFeedback: game.settings.get('rnk-vortex-touch-hud', 'audioFeedback')
     };
 
-    // Try to connect to Vortex Quantum bridge
-    if (instance.settings.vortexIntegration && window.vortexQuantum) {
-      instance.vortexBridge = window.vortexQuantum;
-      console.log('✓ Connected to Vortex Quantum Security Bridge');
+    // Authenticate with Vortex Quantum security system if available
+    if (window.vortexQuantum && typeof window.vortexQuantum.authenticate === 'function') {
+      try {
+        instance.securityAuthenticated = await window.vortexQuantum.authenticate('rnk-vortex-touch-hud');
+      } catch (err) {
+        // Security system not available - module continues normally
+        instance.securityAuthenticated = false;
+      }
     }
 
     if (instance.isTouchDevice && instance.enabled) {
       instance.render();
-      console.log('🎮 Vortex Touch HUD | Ready for touch input');
     }
   }
 
@@ -141,7 +134,6 @@ class RNKVortexTouchHUD {
     container.style.setProperty('--button-size', `${this.settings.buttonSize}px`);
 
     this.attachEventListeners();
-    this.logVortexEvent('HUD_RENDERED', { layout: this.settings.layout });
   }
 
   /**
@@ -229,8 +221,6 @@ class RNKVortexTouchHUD {
     // Orientation change
     window.addEventListener('orientationchange', () => this.handleOrientationChange());
     window.addEventListener('resize', () => this.handleResize());
-
-    this.logVortexEvent('EVENT_LISTENERS_ATTACHED', { count: container.querySelectorAll('[data-action]').length });
   }
 
   /**
@@ -289,7 +279,6 @@ class RNKVortexTouchHUD {
    * Handle swipe gesture
    */
   handleSwipeGesture(direction) {
-    console.log(`📱 Swipe detected: ${direction}`);
     this.playAudioFeedback('swipe');
     
     const tabs = this.hudElement.querySelectorAll('[data-panel]');
@@ -311,7 +300,6 @@ class RNKVortexTouchHUD {
     const button = event.currentTarget;
     const action = button.dataset.action;
 
-    console.log(`🎯 Action triggered: ${action}`);
     this.playAudioFeedback('click');
 
     // Map actions to Foundry controls
@@ -473,7 +461,6 @@ class RNKVortexTouchHUD {
    * Handle orientation change
    */
   handleOrientationChange() {
-    console.log('📱 Device orientation changed');
     if (this.hudElement) {
       this.hudElement.classList.toggle('landscape', window.innerWidth > window.innerHeight);
     }
@@ -522,7 +509,20 @@ class RNKVortexTouchHUD {
       this.hudElement.remove();
       this.hudElement = null;
     }
-    console.log('🎮 Vortex Touch HUD | Destroyed');
+  }
+
+  /**
+   * Log an event (only if security is authenticated)
+   */
+  logVortexEvent(eventType, eventData) {
+    if (this.securityAuthenticated && window.vortexQuantum && typeof window.vortexQuantum.logEvent === 'function') {
+      window.vortexQuantum.logEvent({
+        module: 'rnk-vortex-touch-hud',
+        type: eventType,
+        data: eventData,
+        timestamp: Date.now()
+      });
+    }
   }
 }
 
