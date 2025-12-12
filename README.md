@@ -44,7 +44,7 @@ Access settings through Foundry's module settings:
 
 ## Integration with Vortex Quantum
 
-The module communicates with the Vortex Quantum security system via the quantum-bridge.js interface. All interactions are logged and monitored for security purposes.
+This module is compatible with the Vortex Quantum™ security system. When Vortex Quantum is available, the module authenticates on startup, and the security system monitors the session for attacks and unauthorized access attempts. All security monitoring happens server-side through Vortex Quantum.
 
 ## Support
 
